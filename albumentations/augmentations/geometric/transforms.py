@@ -465,12 +465,9 @@ class Affine(DualTransform):
             The value is only used when `mode=constant`. The expected value range is ``[0, 255]`` for ``uint8`` images.
         cval_mask (number or tuple of number): Same as cval but only for masks.
         mode (int): OpenCV border flag.
-        fit_output (bool): Whether to modify the affine transformation so that the whole output image is always
-            contained in the image plane (``True``) or accept parts of the image being outside
-            the image plane (``False``). This can be thought of as first applying the affine transformation
-            and then applying a second transformation to "zoom in" on the new image so that it fits the image plane,
-            This is useful to avoid corners of the image being outside of the image plane after applying rotations.
-            It will however negate translation and scaling.
+        fit_output (bool): Whether to fit the output shape so that the whole output image is tightly contained in the image plane
+            (``True``) or keep the output shape equal to the input shape and accept parts of the image possibly being outside of the
+            image plane (``False``). Fitting can be useful to avoid corners of the image being outside of the image plane after applying rotations. However, any translation will be ignored.
         p (float): probability of applying the transform. Default: 0.5.
 
     Targets:
